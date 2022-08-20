@@ -28,7 +28,9 @@ LRESULT CALLBACK hook(int c, WPARAM w, LPARAM l)
 	return CallNextHookEx(_hook, c, w, l);
 }
 
-void __stdcall init(HHOOK a, HWND b) {
+bool __stdcall init(HHOOK a, HWND b) {
+	if (hwnd)return hwnd == b;
 	_hook = a;
 	hwnd = b;
+	return true;
 }
